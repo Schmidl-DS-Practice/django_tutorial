@@ -1,0 +1,4 @@
+mysite/mysite
+__pycache__
+*sqlite3
+manage.py
