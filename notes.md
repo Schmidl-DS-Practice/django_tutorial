@@ -46,3 +46,35 @@
 # To create app
 `python manage.py startapp *app name*`
 
+# Write your first view
+``from django.http import HttpResponse
+
+
+def index(request):
+    return HttpResponse("Hello, world. You're at the polls index.")``
+
+## Note:
+- To call the view, we need to map it to a URL - and for this we need a URLconf.
+
+- To create a URLconf in the polls directory, create a file called urls.py.
+
+
+# In polls/urls.py
+``from django.urls import path
+
+from . import views
+
+urlpatterns = [
+    path('', views.index, name='index'),
+]``
+
+# In mysite/urls.py
+The next step is to point the root URLconf at the polls.urls module. Add an import for django.urls.include and insert an include() in the urlpatterns list, so you have:
+
+## Note:
+- see mysite/urls.py for code implementation
+
+- The `include()` function allows referencing other URLconfs. Whenever Django encounters `include()`, it chops off whatever part of the URL matched up to that point and sends the remaining string to the included URLconf for further processing.
+- The idea behind `include()` is to make it easy to plug-and-play URLs. Since polls are in their own URLconf (polls/urls.py), they can be placed under `“/polls/”`, or under `“/fun_polls/”`, or under `“/content/polls/”`, or any other path root, and the app will still work.
+- You should always use `include()` when you include other URL patterns. `admin.site.urls` is the only exception to this.
+
