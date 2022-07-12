@@ -78,3 +78,25 @@ The next step is to point the root URLconf at the polls.urls module. Add an impo
 - The idea behind `include()` is to make it easy to plug-and-play URLs. Since polls are in their own URLconf (polls/urls.py), they can be placed under `“/polls/”`, or under `“/fun_polls/”`, or under `“/content/polls/”`, or any other path root, and the app will still work.
 - You should always use `include()` when you include other URL patterns. `admin.site.urls` is the only exception to this.
 
+# To verify index view is wired into the URLconf
+`python manager.py runserver`
+
+## Note:
+- Go to http://localhost:8000/polls/ in your browser, and you should see the text “Hello, world. You’re at the polls index.”, which you defined in the index view.
+- If you go to http://localhost:8000/, a 404 error will be displayed
+
+# Final Notes
+- The `path()` function is passed four arguments, two required: route and view, and two optional: kwargs, and name. At this point, it’s worth reviewing what these arguments are for.
+- `path()` argument: `route`
+route is a string that contains a URL pattern. When processing a request, Django starts at the first pattern in urlpatterns and makes its way down the list, comparing the requested URL against each pattern until it finds one that matches.
+
+Patterns don’t search GET and POST parameters, or the domain name. For example, in a request to https://www.example.com/myapp/, the URLconf will look for myapp/. In a request to https://www.example.com/myapp/?page=3, the URLconf will also look for myapp/.
+
+- `path()` argument: `view¶`
+When Django finds a matching pattern, it calls the specified view function with an HttpRequest object as the first argument and any “captured” values from the route as keyword arguments. We’ll give an example of this in a bit.
+
+- `path()` argument: `kwargs¶`
+Arbitrary keyword arguments can be passed in a dictionary to the target view. We aren’t going to use this feature of Django in the tutorial.
+
+- `path()` argument: `name¶`
+Naming your URL lets you refer to it unambiguously from elsewhere in Django, especially from within templates. This powerful feature allows you to make global changes to the URL patterns of your project while only touching a single file.
