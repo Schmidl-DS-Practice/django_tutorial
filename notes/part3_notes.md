@@ -100,6 +100,3 @@ The answer is to add namespaces to your URLconf. In the polls/urls.py file, go a
 
 to polls/urls.py
 `app_name = 'polls'`
-
-
-
