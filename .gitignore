@@ -1,4 +1,2 @@
-mysite/mysite
+mysite/mysite/settings.py
 __pycache__
-*sqlite3
-manage.py
